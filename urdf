@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+<robot name="2arms" xlmns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- base of the arm -->
+  <link name="arm_base_link">
+    <inertial>
+      <mass value="0.1"/>
+      <origin rpy="0 0 0" xyz="0.0 0 0.0"/>
+      <inertia ixx="0.000041667" ixy="0" ixz="0" iyy="0.000041667" iyz="0" izz="0.000041667"/>
+    </inertial>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- This will attach the arm to the laser link -->
+  <joint name="arm_to_laser" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0 0.05"/> 
+    <parent link="sensor_laser"/>  
+    <child link="arm_base_link"/>
+  </joint>
+
+ <!-- first link of the arm -->
+  <link name="arm_link_01">
+    <inertial>
+      <mass value="0.025"/>
+      <origin rpy="0 0 0" xyz="0.0 0 0.0"/>
+      <inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000087225"/>
+    </inertial>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.0 0 0.0"/>
+      <geometry>
+        <cylinder radius="0.017" length="0.04"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0.0 0 0.0"/>
+      <geometry>
+        <cylinder radius="0.017" length="0.04"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="arm_joint_01" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="1000.0" lower="-3.14 upper="3.14" velocity="0.2"/>
+    <origin rpy="0 0 0" xyz="0 0 0.05"/> 
+    <parent link="arm_base_link"/>  
+    <child link="arm_link_01"/>
+  </joint>
+
+ <!-- second link of the arm -->
+  <link name="arm_link_02">
+    <inertial>
+      <mass value="0.025"/>
+      <origin rpy="0 0 0" xyz="0.0 0 0.0"/>
+      <inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000087225"/>
+    </inertial>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.0 0 0.02"/>
+      <geometry>
+        <cylinder radius="0.017" length="0.04"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0.0 0 0.02"/>
+      <geometry>
+        <cylinder radius="0.017" length="0.04"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="arm_joint_02" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-1.8 upper="1.8" velocity="0.2"/>
+    <origin rpy="0 0 0" xyz="0 0 0.02"/> 
+    <parent link="arm_link_01"/>  
+    <child link="arm_link_02"/>
+  </joint>
+
+ <!-- third link of the arm -->
+  <link name="arm_link_03">
+    <inertial>
+      <mass value="0.025"/>
+      <origin rpy="0 0 0" xyz="0.0 0 0.0"/>
+      <inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000087225"/>
+    </inertial>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.0 0 0.04"/>
+      <geometry>
+        <cylinder radius="0.017" length="0.04"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0.0 0 0.04"/>
+      <geometry>
+        <cylinder radius="0.017" length="0.04"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="arm_joint_03" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-1.8 upper="1.8" velocity="0.2"/>
+    <origin rpy="0 0 0" xyz="0 0 0.02"/> 
+    <parent link="arm_link_02"/>  
+    <child link="arm_link_03"/>
+  </joint>
+
+ <!-- fourth link of the arm -->
+  <link name="arm_link_04">
+    <inertial>
+      <mass value="0.025"/>
+      <origin rpy="0 0 0" xyz="0.0 0 0.0"/>
+      <inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000087225"/>
+    </inertial>
+    <collision>
+      <origin rpy="0 0 1.57" xyz="0.0 0 0.06"/>
+      <geometry>
+        <box size="0.017 0.094 0.04"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 1.57" xyz="0.0 0 0.06"/>
+      <geometry>
+        <box size="0.017 0.094 0.04"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="arm_joint_04" type="revolute">
+    <axis xyz="1 0 0"/>
+    <limit effort="1000.0" lower="-1.8 upper="1.8" velocity="0.2"/>
+    <origin rpy="0 0 0" xyz="0 0 0.02"/> 
+    <parent link="arm_link_03"/>  
+    <child link="arm_link_04"/>
+ </joint>
+
+</robot>
